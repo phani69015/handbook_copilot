@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Python cache
+__pycache__
+*.py[cod]
+*.egg-info
+
+# Environment
+.env
+.env.example
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+
+# Data (mounted as volume)
+data/*.pdf
+
+# Tests (not needed in production image)
+tests/
+
+# Documentation
+*.md

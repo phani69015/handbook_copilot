@@ -1,0 +1,22 @@
+{
+  "codes": {
+    "INV-d8d2dc": {
+      "status": "used",
+      "used_by": "MK-3b2c",
+      "created_at": "2026-05-28T15:33:32.496798",
+      "used_at": "2026-05-28T15:33:57.983343"
+    },
+    "INV-38e4a1": {
+      "status": "available",
+      "used_by": null,
+      "created_at": "2026-05-28T15:33:32.496805",
+      "used_at": null
+    },
+    "INV-c63d94": {
+      "status": "available",
+      "used_by": null,
+      "created_at": "2026-05-28T15:33:32.496808",
+      "used_at": null
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "colleges": {
+    "SPCK-893f": {
+      "college_name": "St Pauls College Kalamassery",
+      "college_code": "SPCK-893f",
+      "total_chunks": 0,
+      "is_indexed": false,
+      "created_at": "2026-05-28T14:53:30.943220"
+    },
+    "MK-3b2c": {
+      "college_name": "MIT Kerala",
+      "college_code": "MK-3b2c",
+      "total_chunks": 0,
+      "is_indexed": false,
+      "has_openai_key": false,
+      "created_at": "2026-05-28T15:33:57.981493",
+      "_openai_api_key": ""
+    }
+  }
+}
