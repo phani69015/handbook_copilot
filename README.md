@@ -177,9 +177,10 @@ handbook-copilot/
 docker compose up -d --build
 ```
 
-### Cloud (Render — Frontend Only)
+### Cloud
 
-1. Push to GitHub
-2. Create Render Web Service → Docker → `Dockerfile.frontend`
-3. Set `BACKEND_URL` env var (point to your backend when ready)
-4. Deploy
+Deploy all services using Docker Compose on any cloud provider (AWS, GCP, DigitalOcean, Hetzner, etc.) or use managed services:
+
+- **Qdrant** → Qdrant Cloud (free 1GB tier)
+- **Backend + Frontend** → Any container hosting (Render, Railway, Cloud Run)
+- **LLM** → OpenAI API (per-college keys) or self-hosted Ollama on GPU instance
