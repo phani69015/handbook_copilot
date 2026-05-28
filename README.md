@@ -58,9 +58,9 @@ curl -X POST http://localhost:8000/admin/invite-codes/generate \
 
 | Interface | URL | Description |
 |-----------|-----|-------------|
-| Home (Landing) | http://localhost:8501 | Product page, college list |
-| Register College | http://localhost:8501/🏫_Register_College | Admin: register + upload handbook |
-| Student Chat | http://localhost:8501/💬_Student_Chat | Students: enter code, ask questions |
+| Home (Landing) | http://localhost:3000 | Product page, college list |
+| Register College | http://localhost:3000/register | Admin: register + upload handbook |
+| Student Chat | http://localhost:3000/chat | Students: enter code, ask questions |
 | API Docs (Swagger) | http://localhost:8000/docs | Interactive API documentation |
 | Qdrant Dashboard | http://localhost:6333/dashboard | Browse vectors, collections |
 
@@ -130,19 +130,19 @@ Then restart: `docker compose restart backend`
 | Service | Port | Purpose |
 |---------|------|---------|
 | Backend (FastAPI) | 8000 | API + RAG pipeline |
-| Frontend (Streamlit) | 8501 | Landing + Student Chat + Register |
+| Frontend (Next.js) | 3000 | Landing + Registration + Student Chat |
 | Qdrant | 6333 | Vector database |
 | Ollama | 11434 | Local LLM inference |
 
 ## Tech Stack
 
+- **Frontend**: Next.js 15, React 18, Material UI (MUI) v6, TypeScript
 - **Backend**: Python 3.12, FastAPI, Pydantic, uvicorn
 - **Vector DB**: Qdrant (cosine similarity search)
 - **LLM**: Ollama (Llama 3.2 / 3.1) or OpenAI (GPT-4o)
 - **Embeddings**: nomic-embed-text (768d) / text-embedding-3-small (1536d)
 - **PDF Parsing**: PyMuPDF4LLM (markdown extraction with page/section metadata)
 - **Chunking**: Custom recursive splitter (section-aware, 500 tokens, 50 overlap)
-- **Frontend**: Streamlit (multi-page app)
 - **Infra**: Docker Compose, named volumes, isolated bridge networks
 - **Security**: Invite code system, per-college API key isolation, admin secret header
 
@@ -152,7 +152,7 @@ Then restart: `docker compose restart backend`
 handbook-copilot/
 ├── docker-compose.yml          # Full stack orchestration
 ├── Dockerfile                  # Backend container
-├── Dockerfile.frontend         # Frontend container
+├── Dockerfile.frontend         # Frontend container (Next.js)
 ├── .env.example                # Environment template
 ├── app/
 │   ├── main.py                 # FastAPI entrypoint
@@ -163,8 +163,13 @@ handbook-copilot/
 │   ├── retrieval/              # Qdrant vector store, retriever
 │   └── models/                 # Schemas + college registry + invite store
 ├── frontend/
-│   ├── streamlit_app.py        # Landing page
-│   └── pages/                  # Register College + Student Chat
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── page.tsx            # Landing page (/)
+│   │   ├── register/page.tsx   # College registration (/register)
+│   │   └── chat/page.tsx       # Student chat (/chat)
+│   ├── components/             # Reusable React components
+│   ├── lib/                    # API client + TypeScript types
+│   └── theme/                  # MUI theme (light purple)
 ├── scripts/                    # Ingestion CLI + model pull
 └── tests/                      # Unit tests
 ```
