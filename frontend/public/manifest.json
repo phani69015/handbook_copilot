@@ -1,0 +1,9 @@
+{
+  "name": "Handbook Copilot",
+  "short_name": "HC",
+  "description": "AI-powered handbook assistant for universities and colleges",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAFF",
+  "theme_color": "#7C3AED"
+}
