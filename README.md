@@ -24,7 +24,7 @@ Student → Enter college code → Ask question → Embed → Search → LLM →
 ┌─────────────────────────────────────────────────────────────┐
 │  Docker Compose                                             │
 │                                                             │
-│  Frontend (Streamlit:8501) → Backend (FastAPI:8000)         │
+│  Frontend (Next.js:3000) → Backend (FastAPI:8000)           │
 │                                    ↕              ↕         │
 │                              Qdrant:6333    Ollama:11434    │
 │                                                             │
