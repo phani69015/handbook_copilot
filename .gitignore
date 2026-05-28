@@ -26,9 +26,17 @@ Thumbs.db
 
 # Data (user-provided PDFs)
 data/*.pdf
+data/colleges.json
+data/invite_codes.json
 
 # Volumes (local development)
 chroma_db/
 
 # uv
 .uv/
+
+# Node.js (frontend)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local

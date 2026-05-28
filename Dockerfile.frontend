@@ -1,26 +1,28 @@
-# ─── Frontend Dockerfile (Streamlit) ────────────────────────
-FROM docker.io/python:3.12-slim
-
-# Install curl for uv installer
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install uv
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
-    mv /root/.local/bin/uv /usr/local/bin/uv
-
+# ─── Frontend Dockerfile (Next.js + MUI) ────────────────────
+FROM docker.io/node:20-alpine AS deps
 WORKDIR /app
+COPY frontend/package.json frontend/package-lock.json* ./
+RUN npm install
 
-# Install only frontend dependencies
-RUN uv pip install --system --no-cache \
-    streamlit>=1.40.0 \
-    httpx>=0.28.0 \
-    pydantic>=2.10.0
+FROM docker.io/node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY frontend/ .
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN npm run build
 
-# Copy frontend code
-COPY frontend/ ./frontend/
+FROM docker.io/node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-EXPOSE 8501
+# Copy standalone output
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
 
-CMD ["streamlit", "run", "frontend/streamlit_app.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true"]
+EXPOSE 3000
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+CMD ["node", "server.js"]

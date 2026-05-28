@@ -78,12 +78,11 @@ services:
     container_name: handbook-frontend
     restart: unless-stopped
     ports:
-      - "8501:8501"
+      - "3000:3000"
     networks:
       - handbook-frontend
     environment:
-      - BACKEND_URL=http://backend:8000
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+      - NEXT_PUBLIC_BACKEND_URL=http://backend:8000
     depends_on:
       backend:
         condition: service_healthy
